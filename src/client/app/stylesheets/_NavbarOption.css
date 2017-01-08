@@ -11,6 +11,7 @@
 }
 
 .option p{
+  padding: 0;
   font-size: 16px;
   font-weight: 500;
   color: rgb(255, 206, 31);

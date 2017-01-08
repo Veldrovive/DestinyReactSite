@@ -4,3 +4,8 @@
   background-color: #2A333E;
   display: flex;
 }
+
+.spacer{
+  height: 60px;
+  flex: 1 0 auto;
+}

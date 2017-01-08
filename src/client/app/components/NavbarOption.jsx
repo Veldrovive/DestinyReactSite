@@ -10,7 +10,11 @@ export default class NavbarOption extends React.Component{
   }
 
   render(){
-    var link = "/"+this.props.option;
+    if(!this.props.link){
+      var link = "/"+this.props.option;
+    }else{
+      var link = this.props.link;
+    }
     return(
       <div className={styles.option}>
         <p><Link to={link}>{this.props.option}</Link></p>

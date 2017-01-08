@@ -11,6 +11,8 @@ export default class Header extends React.Component{
         <NavbarOption option="Clans"/>
         <NavbarOption option="Players"/>
         <NavbarOption option="Me"/>
+        <div className={styles.spacer}></div>
+        <NavbarOption option="Home" link="/"/>
       </div>
     )
   }

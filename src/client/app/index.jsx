@@ -18,7 +18,7 @@ class App extends React.Component {
     if(!this.props.children){
       var insert = (
         <div>
-          <p className={styles.welcomeText}>Welcome to the Destiny Clan Extender</p>
+          <p className="header">Welcome to the Destiny Clan Extender</p>
           <p>This is a pet project to create an easier way to interact and play with your Destiny clan.</p>
         </div>
       )

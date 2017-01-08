@@ -6,22 +6,17 @@
   flex-direction: column;
 }
 
-.welcomeText{
-  font-size: 20px;
-  font-weight: 900;
-}
-
 .subPage{
   flex: 1 0 auto;
   display: flex;
   flex-direction: row;
   position: relative;
+  background-color: #1c2127;
 }
 
 .pageContent{
   flex: 1 0 auto;
-  background-color: grey;
-  padding: 10px;
+  background-color: #3e444c;
 }
 
 .spacer{
