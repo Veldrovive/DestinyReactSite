@@ -7,6 +7,7 @@ import styles from './stylesheets/_Index.css'
 import Header from './components/Header.jsx'
 import Footer from './components/Footer.jsx'
 import Players from './components/Players.jsx'
+import Clans from './components/Clans.jsx'
 
 class App extends React.Component {
   constructor(){
@@ -48,7 +49,7 @@ class App extends React.Component {
 render((
   <Router history={browserHistory}>
     <Route path="/" component={App}>
-          <Route path="/Clans" component={Players}/>
+          <Route path="/Clans" component={Clans}/>
           <Route path="/Players" component={Players}/>
           <Route path="/Me" component={Players}/>
     </Route>

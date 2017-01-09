@@ -75,6 +75,10 @@
 	
 	var _Players2 = _interopRequireDefault(_Players);
 	
+	var _Clans = __webpack_require__(/*! ./components/Clans.jsx */ 470);
+	
+	var _Clans2 = _interopRequireDefault(_Clans);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -149,7 +153,7 @@
 	  _react2.default.createElement(
 	    _reactRouter.Route,
 	    { path: '/', component: App },
-	    _react2.default.createElement(_reactRouter.Route, { path: '/Clans', component: _Players2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: '/Clans', component: _Clans2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/Players', component: _Players2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/Me', component: _Players2.default })
 	  )
@@ -27924,7 +27928,7 @@
 	
 	    var _this = _possibleConstructorReturn(this, (Players.__proto__ || Object.getPrototypeOf(Players)).call(this));
 	
-	    _this.state = { power: 'telekinetic' };
+	    _this.state = { player: '' };
 	
 	    _this.render = _this.render.bind(_this);
 	    _this.handleSearch = _this.handleSearch.bind(_this);
@@ -27934,8 +27938,25 @@
 	  _createClass(Players, [{
 	    key: 'handleSearch',
 	    value: function handleSearch(name) {
-	      this.setState({ power: name });
-	      console.log(name);
+	      this.setState({ player: name });
+	      console.log("Searching for player " + name);
+	      try {
+	        (0, _request2.default)({
+	          url: 'https://www.bungie.net/Platform/User/SearchUsersPaged/' + name + '/1/1/', //URL to hit
+	          method: 'GET', //Specify the method
+	          headers: { //We can define headers too
+	            'X-API-Key': 'f733026343ec46669a6e9d49d08f3c6b'
+	          }
+	        }, function (error, response, body) {
+	          if (error) {
+	            console.log(error);
+	          } else {
+	            console.log(response.statusCode, body);
+	          }
+	        });
+	      } catch (err) {
+	        console.log(err);
+	      }
 	    }
 	  }, {
 	    key: 'render',
@@ -27946,10 +27967,9 @@
 	        _react2.default.createElement(_SearchBar2.default, { searchObject: 'Players', onSearch: this.handleSearch }),
 	        _react2.default.createElement(
 	          'p',
-	          { className: _Players2.default.nerd },
-	          '*In nerd voice* I have ',
-	          this.state.power,
-	          ' powers'
+	          { className: _Players2.default.playerName },
+	          'Player name = ',
+	          this.state.player
 	        )
 	      );
 	    }
@@ -81185,11 +81205,11 @@
 	
 	
 	// module
-	exports.push([module.id, "._Players__nerd___17s1f{\n  font-size: 30px;\n  font-weight: 900;\n}\n", ""]);
+	exports.push([module.id, "._Players__playerName___2zHct{\n  font-size: 30px;\n  font-weight: 900;\n}\n", ""]);
 	
 	// exports
 	exports.locals = {
-		"nerd": "_Players__nerd___17s1f"
+		"playerName": "_Players__playerName___2zHct"
 	};
 
 /***/ },
@@ -81322,6 +81342,153 @@
 	// exports
 	exports.locals = {
 		"searchBar": "_SearchBar__searchBar___3DR_5"
+	};
+
+/***/ },
+/* 470 */
+/*!*********************************************!*\
+  !*** ./src/client/app/components/Clans.jsx ***!
+  \*********************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _request = __webpack_require__(/*! request */ 247);
+	
+	var _request2 = _interopRequireDefault(_request);
+	
+	var _Clans = __webpack_require__(/*! ../stylesheets/_Clans.css */ 471);
+	
+	var _Clans2 = _interopRequireDefault(_Clans);
+	
+	var _SearchBar = __webpack_require__(/*! ./SearchBar.jsx */ 467);
+	
+	var _SearchBar2 = _interopRequireDefault(_SearchBar);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Clans = function (_React$Component) {
+	  _inherits(Clans, _React$Component);
+	
+	  function Clans() {
+	    _classCallCheck(this, Clans);
+	
+	    var _this = _possibleConstructorReturn(this, (Clans.__proto__ || Object.getPrototypeOf(Clans)).call(this));
+	
+	    _this.state = { clanName: '' };
+	
+	    _this.render = _this.render.bind(_this);
+	    _this.handleSearch = _this.handleSearch.bind(_this);
+	    return _this;
+	  }
+	
+	  _createClass(Clans, [{
+	    key: 'handleSearch',
+	    value: function handleSearch(name) {
+	      console.log("Searching for clan " + name);
+	      this.setState({ clanName: name });
+	      try {
+	        (0, _request2.default)({
+	          url: 'https://www.bungie.net/Platform/User/SearchUsersPaged/' + name + '/1/1/', //URL to hit
+	          method: 'GET', //Specify the method
+	          headers: { //We can define headers too
+	            'X-API-Key': 'f733026343ec46669a6e9d49d08f3c6b'
+	          }
+	        }, function (error, response, body) {
+	          if (error) {
+	            console.log(error);
+	          } else {
+	            console.log(response.statusCode, body);
+	          }
+	        });
+	      } catch (err) {
+	        console.log(err);
+	      }
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(_SearchBar2.default, { searchObject: 'Players', onSearch: this.handleSearch }),
+	        _react2.default.createElement(
+	          'p',
+	          { className: _Clans2.default.clanName },
+	          'Clan name = ',
+	          this.state.clanName
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return Clans;
+	}(_react2.default.Component);
+	
+	exports.default = Clans;
+
+/***/ },
+/* 471 */
+/*!***********************************************!*\
+  !*** ./src/client/app/stylesheets/_Clans.css ***!
+  \***********************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+	
+	// load the styles
+	var content = __webpack_require__(/*! !./../../../../~/css-loader?{"modules":true,"localIdentName":"[name]__[local]___[hash:base64:5]"}!./_Clans.css */ 472);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(/*! ./../../../../~/style-loader/addStyles.js */ 236)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../../node_modules/css-loader/index.js?{\"modules\":true,\"localIdentName\":\"[name]__[local]___[hash:base64:5]\"}!./_Clans.css", function() {
+				var newContent = require("!!./../../../../node_modules/css-loader/index.js?{\"modules\":true,\"localIdentName\":\"[name]__[local]___[hash:base64:5]\"}!./_Clans.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 472 */
+/*!************************************************************************************************************************************!*\
+  !*** ./~/css-loader?{"modules":true,"localIdentName":"[name]__[local]___[hash:base64:5]"}!./src/client/app/stylesheets/_Clans.css ***!
+  \************************************************************************************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(/*! ./../../../../~/css-loader/lib/css-base.js */ 235)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, "._Clans__clanName___2Se4g{\n  font-size: 30px;\n  font-weight: 900;\n}\n", ""]);
+	
+	// exports
+	exports.locals = {
+		"clanName": "_Clans__clanName___2Se4g"
 	};
 
 /***/ }

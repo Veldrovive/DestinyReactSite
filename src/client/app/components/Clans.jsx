@@ -1,22 +1,22 @@
 import React from 'react'
 import request from 'request'
 
-import styles from '../stylesheets/_Players.css'
+import styles from '../stylesheets/_Clans.css'
 
 import SearchBar from './SearchBar.jsx'
 
-export default class Players extends React.Component{
+export default class Clans extends React.Component{
   constructor(){
     super()
-    this.state = {player: ''}
+    this.state = {clanName: ''}
 
     this.render = this.render.bind(this)
     this.handleSearch = this.handleSearch.bind(this)
   }
 
   handleSearch(name){
-    this.setState({player: name})
-    console.log("Searching for player "+name)
+    console.log("Searching for clan "+name)
+    this.setState({clanName: name})
     try{
       request({
         url: 'https://www.bungie.net/Platform/User/SearchUsersPaged/'+name+'/1/1/', //URL to hit
@@ -30,7 +30,7 @@ export default class Players extends React.Component{
           } else {
               console.log(response.statusCode, body);
           }
-      })
+      });
     }catch(err){
       console.log(err)
     }
@@ -40,7 +40,7 @@ export default class Players extends React.Component{
     return(
       <div>
         <SearchBar searchObject="Players" onSearch={this.handleSearch}/>
-        <p className={styles.playerName}>Player name = {this.state.player}</p>
+        <p className={styles.clanName}>Clan name = {this.state.clanName}</p>
       </div>
     )
   }
