@@ -1,14 +1,22 @@
 import React from 'react'
 import request from 'request'
+import { connect } from 'react-redux'
 
 import styles from '../stylesheets/_Clans.css'
 
-import SearchBar from './SearchBar.jsx'
+import {getClan} from '../actions/clanActions'
 
+import SearchBar from './SearchBar.jsx'
+//import ClanContent from './ClanContent.jsx'
+
+@connect((store) => {
+  return{
+    clan: store.reducers.clan
+  }
+})
 export default class Clans extends React.Component{
   constructor(){
     super()
-    this.state = {clanName: ''}
 
     this.render = this.render.bind(this)
     this.handleSearch = this.handleSearch.bind(this)
@@ -16,31 +24,14 @@ export default class Clans extends React.Component{
 
   handleSearch(name){
     console.log("Searching for clan "+name)
-    this.setState({clanName: name})
-    try{
-      request({
-        url: 'https://www.bungie.net/Platform/User/SearchUsersPaged/'+name+'/1/1/', //URL to hit
-        method: 'GET', //Specify the method
-        headers: { //We can define headers too
-            'X-API-Key': 'f733026343ec46669a6e9d49d08f3c6b',
-        }
-      }, function(error, response, body){
-          if(error) {
-              console.log(error);
-          } else {
-              console.log(response.statusCode, body);
-          }
-      });
-    }catch(err){
-      console.log(err)
-    }
+    this.props.dispatch(getClan(name))
   }
 
   render(){
     return(
       <div>
-        <SearchBar searchObject="Players" onSearch={this.handleSearch}/>
-        <p className={styles.clanName}>Clan name = {this.state.clanName}</p>
+        <SearchBar searchObject="Clans" onSearch={this.handleSearch}/>
+        <p className={styles.clanName}>Clan id = {this.props.clan.id}</p>
       </div>
     )
   }
