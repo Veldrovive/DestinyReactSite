@@ -10,6 +10,29 @@ const initialState = {
 
 const ClanReducer = (state = initialState, action) => {
   switch(action.type) {
+    case "CLEAR_CLAN": {
+      return{...state,
+        name: '',
+        id: 0,
+        members: [],
+        memberCount: 0,
+        fetched: false,
+        fetching: false,
+      }
+    }
+
+    case "CLAN_NAME": {
+      return{...state,
+        name: action.payload
+      }
+    }
+
+    case 'CLAN_MEMBER_COUNT': {
+      return{...state,
+        memberCount: action.payload,
+      }
+    }
+
     case "CLAN_ID": {
       return{...state,
         id: action.payload

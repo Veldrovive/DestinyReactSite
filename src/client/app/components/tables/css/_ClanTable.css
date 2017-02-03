@@ -1,0 +1,38 @@
+.tableContainer{
+  max-height: 34em;
+  height: -moz-max-content;
+  height: -webkit-max-content;
+  height: max-content;
+  overflow-y: auto;
+  overflow-x: hidden;
+  flex: 0 0 auto;
+  margin-top: .5em;
+  margin-left: 1em;
+  margin-right: 1em;
+  border-top: 1px solid #6a6d71;
+  border-bottom: 1px solid #6a6d71;
+}
+
+
+
+.memberTable{
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  border-bottom: 1px solid #6a6d71;
+}
+
+.memberTable thead{
+  color: gold;
+}
+
+.memberTable td, th {
+  border-left: 1px solid #6a6d71;
+  border-right: 1px solid #6a6d71;
+  border-bottom: 1px solid #6a6d71;
+  text-align: left;
+  padding: 8px;
+}
+
+.memberTable tr:nth-child(even) {
+  background-color: #6a6d71;
+}
