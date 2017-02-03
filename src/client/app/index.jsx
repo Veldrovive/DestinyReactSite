@@ -1,12 +1,20 @@
 import React from 'react';
 import {render} from 'react-dom';
 import { Router, Route, Link, browserHistory, IndexRedirect } from 'react-router'
+import {createStore, combineReducers} from 'redux'
+import { Provider } from 'react-redux'
+import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
+
+import store from './store.js'
+
+const history = syncHistoryWithStore(browserHistory, store)
 
 import styles from './stylesheets/_Index.css'
 
 import Header from './components/Header.jsx'
 import Footer from './components/Footer.jsx'
 import Players from './components/Players.jsx'
+import Clans from './components/Clans.jsx'
 
 class App extends React.Component {
   constructor(){
@@ -46,11 +54,15 @@ class App extends React.Component {
 }
 
 render((
-  <Router history={browserHistory}>
-    <Route path="/" component={App}>
-          <Route path="/Clans" component={Players}/>
-          <Route path="/Players" component={Players}/>
-          <Route path="/Me" component={Players}/>
-    </Route>
-  </Router>
+  <Provider store={store}>
+    <Router history={history}>
+      <Route path="/" component={App}>
+            <Route path="/Clans" component={Clans}>
+
+            </Route>
+            <Route path="/Players" component={Players}/>
+            <Route path="/Me" component={Players}/>
+      </Route>
+    </Router>
+  </Provider>
 ) , document.getElementById('app'));

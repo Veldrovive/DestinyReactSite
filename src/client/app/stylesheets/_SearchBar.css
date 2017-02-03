@@ -22,7 +22,6 @@
 }
 
 .searchBar form input[type=text]:focus{
-  width: 200px;
   outline: none;
   border-bottom: 3px solid rgb(255, 206, 31);
 }
